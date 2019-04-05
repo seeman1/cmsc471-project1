@@ -39,6 +39,9 @@ var evaluateBoard = function(board, color) {
   return value;
 };
 
+//The third eval
+//The first section is copied from eval 2
+//Doubles the value of pieces that control the center of the board
 var eval_3 = function (board, color) {
   // Sets the value for each piece using standard piece value
   var pieceValue = {
@@ -62,6 +65,7 @@ var eval_3 = function (board, color) {
     });
   });
 
+  //The array that tracks the list of positions and pieces that are valuable there
   var positions = {
     22: "qnbp",
     23: "qb",
@@ -85,10 +89,10 @@ var eval_3 = function (board, color) {
     55: "qnbp"
   };
 
- for(var [row, col] in positions) {
-     if(board[row][col] &&
-        positions[row+col].indexOf(board[row][col]['type']) > -1)
-        value += pieceValue[board[row][col]['type']] * (board[row][col]['color'] === color ? 1 : -1);
+ for(var [row, col] in positions) { //Loop through the positions array
+     if(board[row][col] &&  //check if a piece is there
+        positions[row+col].indexOf(board[row][col]['type']) > -1) //check if the piece matches one of the pieces in the string
+        value += pieceValue[board[row][col]['type']] * (board[row][col]['color'] === color ? 1 : -1); //add the piece's value to the value var
   }              
 
   return value;
